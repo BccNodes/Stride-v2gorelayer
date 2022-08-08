@@ -60,11 +60,11 @@ rly config init
 ```
 
 # Öncelikle ihtiyacımız olan zincir için gerekli ayarların olduğu bir dosya ekleyelim, bunun için şu komutu yazıyoruz:
-`nano stride.json` 
-
+ 
 İp adresi+port ve cüzdan isminizi düzenleyin. herhangi bir cüzdan ismi belirleyebilirsiniz. 
 
 ```
+sudo tee $HOME/root/stride.json > /dev/null <<EOF
 {
   "type": "cosmos",
   "value": {
@@ -81,12 +81,14 @@ rly config init
     "sign-mode": "direct"
     }
 }
+EOF
 ```
 
 İkinci zincir için de aynısını yapıyoruz:
-`nano gaia.json`
+
 
 ```
+sudo tee $HOME/root/gaia.json > /dev/null <<EOF
 {
   "type": "cosmos",
   "value": {
@@ -103,6 +105,7 @@ rly config init
     "sign-mode": "direct" 
     }
 }
+EOF
 ```
 
 Ardından düğümleri relayere kaydediyoruz:
