@@ -64,7 +64,7 @@ rly config init
 İp adresi+port ve cüzdan isminizi düzenleyin. herhangi bir cüzdan ismi belirleyebilirsiniz. 
 
 ```
-sudo tee $HOME/root/stride.json > /dev/null <<EOF
+sudo tee $HOME/stride.json > /dev/null <<EOF
 {
   "type": "cosmos",
   "value": {
@@ -88,7 +88,7 @@ EOF
 
 
 ```
-sudo tee $HOME/root/gaia.json > /dev/null <<EOF
+sudo tee $HOME/gaia.json > /dev/null <<EOF
 {
   "type": "cosmos",
   "value": {
