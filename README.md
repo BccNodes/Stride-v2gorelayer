@@ -68,9 +68,9 @@ sudo tee $HOME/stride.json > /dev/null <<EOF
 {
   "type": "cosmos",
   "value": {
-    "key": "<your wallet moniker>",
+    "key": "<cüzdan ismi giriniz>",
     "chain-id": "STRIDE-TESTNET-2",
-    "rpc-addr": "http://<your IP address>:26657",
+    "rpc-addr": "http://STRIDESUNUCUİP:PORT",
     "account-prefix": "stride",
     "keyring-backend": "test",
     "gas-adjustment": 1.2,
@@ -92,9 +92,9 @@ sudo tee $HOME/gaia.json > /dev/null <<EOF
 {
   "type": "cosmos",
   "value": {
-    "key": "<your wallet moniker>",
+    "key": "<cüzdan ismi giriniz>",
     "chain-id": "GAIA",
-    "rpc-addr": "http://<your IP address>:26657",
+    "rpc-addr": "http://GAİASUNUCUİP:PORT",
     "account-prefix": "cosmos",
     "keyring-backend": "test",
     "gas-adjustment": 1.2,
@@ -108,7 +108,7 @@ sudo tee $HOME/gaia.json > /dev/null <<EOF
 EOF
 ```
 
-Ardından düğümleri relayere kaydediyoruz:
+Ardından düğümleri relayera kaydediyoruz:
 ```
 rly chains add --file=/root/stride.json stride
 rly chains add --file=/root/gaia.json gaia
@@ -117,8 +117,8 @@ rly chains add --file=/root/gaia.json gaia
 
 Ardından, önce bir ağda, sonra diğerinde kurtarma anahtarları ekliyoruz:
 ```
-rly keys restore stride <your wallet moniker> "mnemoniclerinizi yazınız"
-rly keys restore gaia <your wallet moniker> "mnemoniclerinizi yazınız"
+rly keys restore stride <wallet isminiz> "mnemoniclerinizi yazınız"
+rly keys restore gaia <wallet isminiz> "mnemoniclerinizi yazınız"
 ```
 
 Bakiye kontrol: 
@@ -158,11 +158,10 @@ rly paths list
 ```
 
 Her şey yolundaysa, bir hizmet dosyası oluşturmaya devam ediyoruz:
-`nano /etc/systemd/system/relayer.service`
 
-İçine yazın, kaydedin.
 
 ```
+sudo tee /etc/systemd/system/relayer.service > /dev/null <<EOF
 [Unit]
 Description=relayer
 After=network.target
@@ -175,6 +174,7 @@ RestartSec=10
 LimitNOFILE=65535
 [Install]
 WantedBy=multi-user.target
+EOF
 ```
 
 Servisi başlatın:
@@ -185,6 +185,22 @@ systemctl enable relayer && systemctl start relayer
 Log kontrol:
 ```
 journalctl -u relayer -f -o cat
+```
+
+### FAYDALI KOMUTLAR
+Servisi durdurun:
+```
+systemctl start relayer
+```
+
+Servisi yeniden başlatın:
+```
+systemctl restart relayer
+```
+
+Servisi devre dışı bırakın:
+```
+systemctl disable relayer
 ```
 
 
